@@ -1,6 +1,5 @@
 using SmoQySynthAC
 using Test
+using TestItemRunner
 
-@testset "SmoQySynthAC.jl" begin
-    # Write your tests here.
-end
+@run_package_tests

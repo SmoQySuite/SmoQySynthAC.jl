@@ -4,3 +4,7 @@
 /Manifest.toml
 /docs/Manifest.toml
 /docs/build/
+docs/Manifest.toml
+test/Manifest.toml
+*.DS_Store
+.DS_Store
