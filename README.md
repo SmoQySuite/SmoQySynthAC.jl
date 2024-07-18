@@ -1,9 +1,9 @@
 # SmoQySynthAC
 
-<!-- [![Stable](https://img.shields.io/badge/docs-stable-blue.svg)](https://SmoQySuite.github.io/SmoQySynthAC.jl/stable/) -->
+[![Stable](https://img.shields.io/badge/docs-stable-blue.svg)](https://SmoQySuite.github.io/SmoQySynthAC.jl/stable/)
 [![Dev](https://img.shields.io/badge/docs-dev-blue.svg)](https://SmoQySuite.github.io/SmoQySynthAC.jl/dev/)
 [![Build Status](https://github.com/SmoQySuite/SmoQySynthAC.jl/actions/workflows/CI.yml/badge.svg?branch=main)](https://github.com/SmoQySuite/SmoQySynthAC.jl/actions/workflows/CI.yml?query=branch%3Amain)
-<!-- [![Coverage](https://codecov.io/gh/SmoQySuite/SmoQySynthAC.jl/branch/main/graph/badge.svg)](https://codecov.io/gh/SmoQySuite/SmoQySynthAC.jl) -->
+[![Coverage](https://codecov.io/gh/SmoQySuite/SmoQySynthAC.jl/branch/main/graph/badge.svg)](https://codecov.io/gh/SmoQySuite/SmoQySynthAC.jl)
 
 [SmoQySynthAC.jl](https://github.com/SmoQySuite/SmoQySynthAC.jl) is a package developed to generate synthetic imaginary time correlation
 data mean to resemble noisy quantum Monte Carlo (QMC) measurements, where the introduced noise is correlated in imaginary time.
@@ -43,5 +43,10 @@ julia> using Pkg; Pkg.add("SmoQySynthAC")
 
 ## Documentation
 
-<!-- - [STABLE](https://SmoQySuite.github.io/SmoQySynthAC.jl/stable/): Documentation for the latest version of the code published to the Julia [`General`](https://github.com/JuliaRegistries/General.git) registry. -->
+- [STABLE](https://SmoQySuite.github.io/SmoQySynthAC.jl/stable/): Documentation for the latest version of the code published to the Julia [`General`](https://github.com/JuliaRegistries/General.git) registry.
 - [DEV](https://SmoQySuite.github.io/SmoQySynthAC.jl/dev/): Documentation for the latest commit to the `main` branch.
+
+## Funding
+
+The development of this code was supported by the U.S. Department of Energy, Office of Science, Basic Energy Sciences,
+under Award Number DE-SC0022311.
