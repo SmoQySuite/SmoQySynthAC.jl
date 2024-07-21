@@ -39,7 +39,7 @@ kernel_tau_sym_bose(ω::T, τ::T, β::T) where {T<:AbstractFloat} = (-β*ω > 10
 
 The fermionic matsubara frequency kernel
 ```math
-K_\beta(\omega, {\rm i}\omega_n) = \frac{1}{{\rm i}\omega_n - \omega},
+K_\beta(\omega, \omega_n) = \frac{1}{{\rm i}\omega_n - \omega},
 ```
 where ``\omega_n = (2n+1)\pi/\beta`` for fermions with ``n \in \mathbb{Z}``.
 """
@@ -51,7 +51,7 @@ kernel_mat_fermi(ω::T, n::Int, β::T) where {T<:AbstractFloat}  = kernel_mat(ω
 
 The bosonic matsubara frequency kernel
 ```math
-K_\beta(\omega, {\rm i}\omega_n) = \frac{1}{{\rm i}\omega_n - \omega},
+K_\beta(\omega, \omega_n) = \frac{1}{{\rm i}\omega_n - \omega},
 ```
 where ``\omega_n = 2n\pi/\beta`` for bosons with ``n \in \mathbb{Z}``.
 """
