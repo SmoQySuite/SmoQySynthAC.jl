@@ -40,11 +40,6 @@ or equivalently via `Pkg` do
 julia> using Pkg; Pkg.add("SmoQySynthAC")
 ```
 
-## Documentation
-
-- [STABLE](https://SmoQySuite.github.io/SmoQySynthAC.jl/stable/): Documentation for the latest version of the code published to the Julia [`General`](https://github.com/JuliaRegistries/General.git) registry.
-- [DEV](https://SmoQySuite.github.io/SmoQySynthAC.jl/dev/): Documentation for the latest commit to the `main` branch.
-
 ## Funding
 
 The development of this code was supported by the U.S. Department of Energy, Office of Science, Basic Energy Sciences,

@@ -110,7 +110,7 @@ Gn = spectral_to_matsubara_correlation_function(;
 
 # The resulting real and imaginary parts of ``G(\text{i}\omega_n)`` are plotted below.
 
-ωn = @. 2π*(n+1)/β
+ωn = @. (2*n+1)*π/β
 
 fig = Figure(
     size = (700, 500),
