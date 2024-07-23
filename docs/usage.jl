@@ -22,8 +22,8 @@ CairoMakie.activate!(type = "svg")
 #
 # As a first step in demonstrating the functionality of [SmoQySynthAC.jl](https://github.com/SmoQySuite/SmoQySynthAC.jl.git) package,
 # let us define a synthetic spectral function ``A(\omega)``.
-# For convenience we will do this using the [`Distributions.jl`](https://github.com/JuliaStats/Distributions.jl.git) package.
-# We will define a spectral function with a Lorentzian (Cauchy) distribution in centered between two Normal distributions on either side.
+# For convenience we will do this using the [Distributions.jl](https://github.com/JuliaStats/Distributions.jl.git) package.
+# Here we define the spectral function as Lorentzian (Cauchy) distribution in between two Normal distributions.
 
 ## define spectral function distribution
 spectral_dist = MixtureModel(
@@ -81,7 +81,7 @@ fig
 τ = collect(range(start = 0.0, stop = β, step = Δτ));
 
 # Now we can calculate ``G(\tau)`` using the [`spectral_to_imaginary_time_correlation_function`](@ref)
-# method and appropriate kernel funciton [`kernel_tau_fermi`](@ref).
+# method and appropriate kernel function [`kernel_tau_fermi`](@ref).
 
 ## Calculate imaginary time Green's function.
 Gτ = spectral_to_imaginary_time_correlation_function(
@@ -105,7 +105,7 @@ Gn = spectral_to_matsubara_correlation_function(;
     β = β,
     spectral_function = spectral_function,
     kernel_function = kernel_mat_fermi,
-    tol= 1e-10,
+    tol = 1e-10,
 );
 
 # The resulting real and imaginary parts of ``G(\text{i}\omega_n)`` are plotted below.

@@ -94,7 +94,7 @@ nothing #hide
 ````
 
 Now we can calculate ``G(\tau)`` using the [`spectral_to_imaginary_time_correlation_function`](@ref)
-method and appropriate kernel funciton [`kernel_tau_fermi`](@ref).
+method and appropriate kernel function [`kernel_tau_fermi`](@ref).
 
 ````@example usage
 # Calculate imaginary time Green's function.
