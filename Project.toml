@@ -1,7 +1,7 @@
 name = "SmoQySynthAC"
 uuid = "fe3e30a4-de68-41ff-a057-b00c4bb8fcbc"
 authors = ["Benjamin Cohen-Stead <benwcs@gmail.com>", "Steven Johnston <sjohn145@utk.edu>"]
-version = "0.1.4"
+version = "0.1.2"
 
 [deps]
 Distributions = "31c24e10-a181-5473-b8eb-7969acd0382f"
