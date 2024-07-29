@@ -91,7 +91,7 @@ function add_noise(
 ) where {T<:AbstractFloat}
 
     Cτ_noisy = zeros(T, length(τ), N_samples)
-    for column in eachcol
+    for column in eachcol(Cτ_noisy)
         add_noise!(
             column,
             Cτ_exact = Cτ_exact,
