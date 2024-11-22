@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8"/><meta name="viewport" content="width=device-width, initial-scale=1.0"/><title>Usage · SmoQySynthAC.jl</title><meta name="title" content="Usage · SmoQySynthAC.jl"/><meta property="og:title" content="Usage · SmoQySynthAC.jl"/><meta property="twitter:title" content="Usage · SmoQySynthAC.jl"/><meta name="description" content="Documentation for SmoQySynthAC.jl."/><meta property="og:description" content="Documentation for SmoQySynthAC.jl."/><meta property="twitter:description" content="Documentation for SmoQySynthAC.jl."/><meta property="og:url" content="https://SmoQySuite.github.io/SmoQySynthAC.jl/usage/"/><meta property="twitter:url" content="https://SmoQySuite.github.io/SmoQySynthAC.jl/usage/"/><link rel="canonical" href="https://SmoQySuite.github.io/SmoQySynthAC.jl/usage/"/><script data-outdated-warner src="../assets/warner.js"></script><link href="https://cdnjs.cloudflare.com/ajax/libs/lato-font/3.0.0/css/lato-font.min.css" rel="stylesheet" type="text/css"/><link href="https://cdnjs.cloudflare.com/ajax/libs/juliamono/0.050/juliamono.min.css" rel="stylesheet" type="text/css"/><link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/fontawesome.min.css" rel="stylesheet" type="text/css"/><link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/solid.min.css" rel="stylesheet" type="text/css"/><link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/brands.min.css" rel="stylesheet" type="text/css"/><link href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.8/katex.min.css" rel="stylesheet" type="text/css"/><script>documenterBaseURL=".."</script><script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.6/require.min.js" data-main="../assets/documenter.js"></script><script src="../search_index.js"></script><script src="../siteinfo.js"></script><script src="../../versions.js"></script><link class="docs-theme-link" rel="stylesheet" type="text/css" href="../assets/themes/catppuccin-mocha.css" data-theme-name="catppuccin-mocha"/><link class="docs-theme-link" rel="stylesheet" type="text/css" href="../assets/themes/catppuccin-macchiato.css" data-theme-name="catppuccin-macchiato"/><link class="docs-theme-link" rel="stylesheet" type="text/css" href="../assets/themes/catppuccin-frappe.css" data-theme-name="catppuccin-frappe"/><link class="docs-theme-link" rel="stylesheet" type="text/css" href="../assets/themes/catppuccin-latte.css" data-theme-name="catppuccin-latte"/><link class="docs-theme-link" rel="stylesheet" type="text/css" href="../assets/themes/documenter-dark.css" data-theme-name="documenter-dark" data-theme-primary-dark/><link class="docs-theme-link" rel="stylesheet" type="text/css" href="../assets/themes/documenter-light.css" data-theme-name="documenter-light" data-theme-primary/><script src="../assets/themeswap.js"></script></head><body><div id="documenter"><nav class="docs-sidebar"><div class="docs-package-name"><span class="docs-autofit"><a href="../">SmoQySynthAC.jl</a></span></div><button class="docs-search-query input is-rounded is-small is-clickable my-2 mx-auto py-1 px-2" id="documenter-search-query">Search docs (Ctrl + /)</button><ul class="docs-menu"><li><a class="tocitem" href="../">Home</a></li><li class="is-active"><a class="tocitem" href>Usage</a></li><li><a class="tocitem" href="../api/">API</a></li></ul><div class="docs-version-selector field has-addons"><div class="control"><span class="docs-label button is-static is-size-7">Version</span></div><div class="docs-selector control is-expanded"><div class="select is-fullwidth is-size-7"><select id="documenter-version-selector"></select></div></div></div></nav><div class="docs-main"><header class="docs-navbar"><a class="docs-sidebar-button docs-navbar-link fa-solid fa-bars is-hidden-desktop" id="documenter-sidebar-button" href="#"></a><nav class="breadcrumb"><ul class="is-hidden-mobile"><li class="is-active"><a href>Usage</a></li></ul><ul class="is-hidden-tablet"><li class="is-active"><a href>Usage</a></li></ul></nav><div class="docs-right"><a class="docs-navbar-link" href="https://github.com/SmoQySuite/SmoQySynthAC.jl" title="View the repository on GitHub"><span class="docs-icon fa-brands"></span><span class="docs-label is-hidden-touch">GitHub</span></a><a class="docs-navbar-link" href="https://github.com/SmoQySuite/SmoQySynthAC.jl/blob/main/docs/usage.jl" title="Edit source on GitHub"><span class="docs-icon fa-solid"></span></a><a class="docs-settings-button docs-navbar-link fa-solid fa-gear" id="documenter-settings-button" href="#" title="Settings"></a><a class="docs-article-toggle-button fa-solid fa-chevron-up" id="documenter-article-toggle-button" href="javascript:;" title="Collapse all docstrings"></a></div></header><article class="content" id="documenter-page"><p>Here we give a basic example demonstrating some of the functionality of the <a href="https://github.com/SmoQySuite/SmoQySynthAC.jl.git">SmoQySynthAC.jl</a> package.</p><pre><code class="language-julia hljs">using SmoQySynthAC
+using Distributions
+using CairoMakie
+
+# render figures using SVG backend so they are sharp
+CairoMakie.activate!(type = &quot;svg&quot;)</code></pre><p>In this example we will work with the single-particle imaginary time fermion Green&#39;s function which is given by</p><p class="math-container">\[G(\tau) = \int_{-\infty}^\infty K_\beta(\omega,\tau) A(\omega)\]</p><p>where <span>$A(\omega)$</span> is the spectral function and</p><p class="math-container">\[K_\beta(\omega,\tau) = \frac{e^{-\tau \omega}}{1 + e^{-\beta \omega}}\]</p><p>is the kernel function where <span>$\beta = 1/T$</span> is the inverse temperature and it is assumed that <span>$\tau \in [0, \beta)$</span>.</p><p>As a first step in demonstrating the functionality of <a href="https://github.com/SmoQySuite/SmoQySynthAC.jl.git">SmoQySynthAC.jl</a> package, let us define a synthetic spectral function <span>$A(\omega)$</span>. For convenience we will do this using the <a href="https://github.com/JuliaStats/Distributions.jl.git">Distributions.jl</a> package. Here we define the spectral function as Lorentzian (Cauchy) distribution in between two Normal distributions.</p><pre><code class="language-julia hljs"># define spectral function distribution
+spectral_dist = MixtureModel(
+    [Normal(-2.0,0.7), Cauchy(0.0, 0.3), Normal(+2.0,0.7)],
+    [0.2, 0.4, 0.4]
+)
+
+# define method to evaluate spectral function
+spectral_function = ω -&gt; pdf(spectral_dist, ω)</code></pre><pre class="documenter-example-output"><code class="nohighlight hljs ansi">#1 (generic function with 1 method)</code></pre><p>Now let us quickly plot our spectral function so we can see what it looks like.</p><pre><code class="language-julia hljs">ωmin = -6.0
+ωmax = 6.0
+ω = collect(range(start = ωmin, stop = ωmax, length = 1000))
+A = spectral_function.(ω)
+
+fig = Figure(
+    size = (700, 400),
+    fonts = (; regular= &quot;CMU Serif&quot;),
+    figure_padding = 10
+)
+
+ax = Axis(
+    fig[1, 1],
+    aspect = 7/4,
+    xlabel = L&quot;\omega&quot;, ylabel = L&quot;A(\omega)&quot;,
+    xlabelsize = 30, ylabelsize = 30,
+    xticklabelsize = 24, yticklabelsize = 24,
+)
+
+lines!(
+    ω, A,
+    linewidth = 2,
+    alpha = 1.0,
+    color = :black,
+    linestyle = :solid
+)
+
+xlims!(ax, ωmin, ωmax)
+ylims!(ax, 0.0, 1.05*maximum(A))
+
+fig</code></pre><img src="be5830dc.svg" alt="Example block output"/><p>The next step is to define the inverse temperature <span>$\beta$</span>, discretization in imaginary <span>$\Delta\tau$</span> and corresponding <span>$\tau$</span> grid.</p><pre><code class="language-julia hljs"># Set inverse temperature.
+β = 10.0
+
+# Set discretization in imaginary time.
+Δτ = 0.05
+
+# Calculate corresponding imaginary time grid.
+τ = collect(range(start = 0.0, stop = β, step = Δτ));</code></pre><p>Now we can calculate <span>$G(\tau)$</span> using the <a href="../api/#SmoQySynthAC.spectral_to_imaginary_time_correlation_function"><code>spectral_to_imaginary_time_correlation_function</code></a> method and appropriate kernel function <a href="../api/#SmoQySynthAC.kernel_tau_fermi"><code>kernel_tau_fermi</code></a>.</p><pre><code class="language-julia hljs"># Calculate imaginary time Green&#39;s function.
+Gτ = spectral_to_imaginary_time_correlation_function(
+    τ = τ,
+    β = β,
+    spectral_function = spectral_function,
+    kernel_function = kernel_tau_fermi,
+    tol = 1e-10
+);</code></pre><p>We can similary calculate the Matsubara Green&#39;s function <span>$G(\text{i}\omega_n)$</span> using the function <a href="../api/#SmoQySynthAC.spectral_to_matsubara_correlation_function"><code>spectral_to_matsubara_correlation_function</code></a> function with the kernel function <a href="../api/#SmoQySynthAC.kernel_mat_fermi"><code>kernel_mat_fermi</code></a>.</p><pre><code class="language-julia hljs"># Define Matsubara frequency grid in terms of integers n where ωₙ = (2n+1)π/β.
+n = collect(-250:250)
+
+# Calculate Matsubara Green&#39;s function.
+Gn = spectral_to_matsubara_correlation_function(;
+    n = n,
+    β = β,
+    spectral_function = spectral_function,
+    kernel_function = kernel_mat_fermi,
+    tol = 1e-10,
+);</code></pre><p>The resulting real and imaginary parts of <span>$G(\text{i}\omega_n)$</span> are plotted below.</p><pre><code class="language-julia hljs">ωn = @. (2*n+1)*π/β
+
+fig = Figure(
+    size = (700, 500),
+    fonts = (; regular= &quot;CMU Serif&quot;),
+    figure_padding = 10
+)
+
+ax = Axis(fig[1, 1],
+    aspect = 7/5,
+    xlabel = L&quot;\omega_n&quot;,
+    ylabel = L&quot;G_\sigma(\text{i}\omega_n)&quot;,
+    xlabelsize = 30, ylabelsize = 30,
+    xticklabelsize = 24, yticklabelsize = 24,
+)
+
+xlims!(ax, minimum(ωn), maximum(ωn))
+
+lines!(
+    ωn, real.(Gn),
+    linewidth = 2, alpha = 2.0, color = :red, linestyle = :solid, label = L&quot;\text{Re}[G_\sigma(\text{i}\omega_n)]&quot;
+)
+
+lines!(
+    ωn, imag.(Gn),
+    linewidth = 2, alpha = 1.5, color = :green, linestyle = :solid, label = L&quot;\text{Im}[G_\sigma(\text{i}\omega_n)]&quot;
+)
+
+axislegend(
+    ax, halign = :left, valign = :top, labelsize = 30
+)
+
+fig</code></pre><img src="9ee9a22b.svg" alt="Example block output"/><p>Having calculated the exact <span>$G(\tau)$</span> function, let us now add some noise to it using the <a href="../api/#SmoQySynthAC.add_noise"><code>add_noise</code></a> method.</p><pre><code class="language-julia hljs">Gτ_noisy = add_noise(
+    Cτ_exact = Gτ,
+    τ = τ,
+    σ = 1.0e-2,
+    ξ = 0.5,
+    sum_rule = C0 -&gt; 1 - C0, # enforces fermionic boundary condition that C(τ=β) = 1 - C(τ=0)
+    noise_type = :TruncatedNormal
+);</code></pre><p>Let us now plot what both <span>$G(\tau)$</span> and <span>$G_{\rm noisy}(\tau)$</span>.</p><pre><code class="language-julia hljs">fig = Figure(
+    size = (700, 500),
+    fonts = (; regular= &quot;CMU Serif&quot;),
+    figure_padding = 10
+)
+
+ax = Axis(fig[1, 1],
+    aspect = 7/5,
+    xlabel = L&quot;\tau&quot;,
+    ylabel = L&quot;G_\sigma(\tau)&quot;,
+    xlabelsize = 30, ylabelsize = 30,
+    xticklabelsize = 24, yticklabelsize = 24,
+)
+
+xlims!(ax, 0.0, β)
+ylims!(ax, 0.0, 1.0)
+
+lines!(
+    τ, Gτ,
+    linewidth = 2, alpha = 2.0, color = :black, linestyle = :solid, label = &quot;Exact&quot;
+)
+
+lines!(
+    τ, Gτ_noisy,
+    linewidth = 2, alpha = 1.5, color = :red, linestyle = :solid, label = &quot;Noisy&quot;
+)
+
+axislegend(
+    ax, halign = :left, valign = :top, labelsize = 30
+)
+
+fig</code></pre><img src="1fa6f494.svg" alt="Example block output"/></article><nav class="docs-footer"><a class="docs-footer-prevpage" href="../">« Home</a><a class="docs-footer-nextpage" href="../api/">API »</a><div class="flexbox-break"></div><p class="footer-message">Powered by <a href="https://github.com/JuliaDocs/Documenter.jl">Documenter.jl</a> and the <a href="https://julialang.org/">Julia Programming Language</a>.</p></nav></div><div class="modal" id="documenter-settings"><div class="modal-background"></div><div class="modal-card"><header class="modal-card-head"><p class="modal-card-title">Settings</p><button class="delete"></button></header><section class="modal-card-body"><p><label class="label">Theme</label><div class="select"><select id="documenter-themepicker"><option value="auto">Automatic (OS)</option><option value="documenter-light">documenter-light</option><option value="documenter-dark">documenter-dark</option><option value="catppuccin-latte">catppuccin-latte</option><option value="catppuccin-frappe">catppuccin-frappe</option><option value="catppuccin-macchiato">catppuccin-macchiato</option><option value="catppuccin-mocha">catppuccin-mocha</option></select></div></p><hr/><p>This document was generated with <a href="https://github.com/JuliaDocs/Documenter.jl">Documenter.jl</a> version 1.8.0 on <span class="colophon-date" title="Friday 22 November 2024 14:22">Friday 22 November 2024</span>. Using Julia version 1.11.1.</p></section><footer class="modal-card-foot"></footer></div></div></div></body></html>
