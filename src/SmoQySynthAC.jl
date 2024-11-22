@@ -13,6 +13,7 @@ include("truncated_normal_noise.jl")
 include("kernel_functions.jl")
 export kernel_tau_fermi, kernel_tau_bose, kernel_tau_sym_bose
 export kernel_mat_fermi, kernel_mat_bose
+export fermi, bose
 
 # functions that take as inputs the spectral function and return various correlation kernel_functions
 include("spectral_to_correlation_function.jl")

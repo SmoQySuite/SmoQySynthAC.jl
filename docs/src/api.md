@@ -35,3 +35,13 @@ kernel_tau_sym_bose
 kernel_mat_fermi
 kernel_mat_bose
 ```
+
+## Utilitie Functions
+
+- [`fermi`](@ref)
+- [`bose`](@ref)
+
+```@docs
+fermi
+bose
+```

@@ -24,7 +24,7 @@
     G_exact = noninteracting_greens.(τ, β, ϵ)
 
     # numerical fudge factor for pole-represention of non-interacting greens
-    η = 1.0e-8
+    η = 1.0e-12
 
     # define spectral function
     locations = [ϵ - η*im]
@@ -37,7 +37,7 @@
         β = β,
         spectral_function = spectral_function,
         kernel_function = kernel_tau_fermi,
-        tol = 1e-10
+        tol = 1e-14
     )
 
     # test that the two greens agree
