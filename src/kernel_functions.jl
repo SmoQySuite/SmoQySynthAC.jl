@@ -78,7 +78,7 @@ f_\beta(\epsilon) & = \overbrace{\left( \frac{1}{e^{\beta\epsilon} + 1}\right)}^
                   & = \underbrace{\frac{1}{2}\left( 1 - \tanh\left(\frac{\beta\epsilon}{2}\right) \right)}_{\text{numerically stable}},
 \end{align}
 ```
-where ``\epsilon`` is energy and ``\beta`` is the inverse temperature.
+where ``\epsilon`` is energy and ``\beta`` is inverse temperature.
 """
 fermi(ϵ::T, β::T) where {T<:AbstractFloat} = (1 - tanh(β*ϵ/2))/2
 
@@ -92,5 +92,6 @@ n_\beta(\epsilon) & = \overbrace{\left( \frac{1}{e^{\beta\epsilon} - 1}\right)}^
                   & = \underbrace{\frac{1}{2}\left(\coth\left(\frac{\beta\epsilon}{2}\right) - 1 \right)}_{\text{numerically stable}},
 \end{align}
 ```
+where ``\epsilon`` is energy and ``\beta`` is inverse temperature.
 """
 bose(ϵ::T, β::T) where {T<:AbstractFloat} = (coth(β*ϵ/2) - 1)/2
