@@ -36,7 +36,7 @@ kernel_mat_fermi
 kernel_mat_bose
 ```
 
-## Utilitie Functions
+## Utility Functions
 
 - [`fermi`](@ref)
 - [`bose`](@ref)
