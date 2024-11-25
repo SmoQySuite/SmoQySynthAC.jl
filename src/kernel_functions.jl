@@ -5,7 +5,7 @@ The imaginary time fermionic kernel
 ```math
 \begin{align}
 K_\beta(\omega,\tau) & = \overbrace{\left(\frac{e^{-\tau\omega}}{1+e^{-\beta\omega}}\right)}^{\text{numerically unstable}} \\
-                     & = \underbrace{\left( e^{\tau\omega} + e^{(\tau-\beta)\omega} \right)^{-1}}_{\text{numerically stable}}
+                     & = \underbrace{\left( e^{\tau\omega} + e^{(\tau-\beta)\omega} \right)^{-1}}_{\text{numerically stable}},
 \end{align}
 ```
 where it is assumed that ``\tau \in [0,\beta)``.
@@ -21,7 +21,7 @@ The imaginary time bosonic kernel
 ```math
 \begin{align}
 K_\beta(\omega,\tau) & = \overbrace{\left(\frac{e^{-\tau\omega}}{1-e^{-\beta\omega}}\right)}^{\text{numerically unstable}} \\
-                     & = \underbrace{\left( e^{\tau\omega} - e^{(\tau-\beta)\omega} \right)^{-1}}_{\text{numerically stable}}
+                     & = \underbrace{\left( e^{\tau\omega} - e^{(\tau-\beta)\omega} \right)^{-1}}_{\text{numerically stable}},
 \end{align}
 ```
 where it is assumed that ``\tau \in [0,\beta)``.
@@ -35,11 +35,15 @@ kernel_tau_bose(ω::T, τ::T, β::T) where {T<:AbstractFloat} = inv(exp(τ*ω) -
 
 The imaginary time symmetrized bosonic kernel
 ```math
-K_\beta(\omega,\tau) = \frac{e^{-\tau\omega} + e^{-(\beta-\tau)\omega}}{1-e^{-\beta\omega}},
+\begin{align}
+K_\beta(\omega,\tau) & = \overbrace{\left(\frac{e^{-\tau\omega} + e^{-(\beta-\tau)\omega}}{1-e^{-\beta\omega}}\right)}^\text{numerically unstable} \\
+& = \underbrace{\left( e^{\tau\omega} - e^{(\tau-\beta)\omega} \right)^{-1} - \left(e^{-\tau\omega} - e^{-(\tau-\beta)\omega} \right)^{-1}}_{\text{numerically stable}},
+\end{align}
 ```
 where it is assumed that ``\tau \in [0,\beta)``.
 """
-kernel_tau_sym_bose(ω::T, τ::T, β::T) where {T<:AbstractFloat} = (-β*ω > 100) ? -(exp((β-τ)*ω) + exp(τ*ω)) : -(exp(-τ*ω) + exp(-(β-τ)*ω))/expm1(-β*ω)
+kernel_tau_sym_bose(ω::T, τ::T, β::T) where {T<:AbstractFloat} = inv(exp(τ*ω) - exp((τ-β)*ω)) - inv(exp(-τ*ω) - exp(-(τ-β)*ω))
+# kernel_tau_sym_bose(ω::T, τ::T, β::T) where {T<:AbstractFloat} = (-β*ω > 100) ? -(exp((β-τ)*ω) + exp(τ*ω)) : -(exp(-τ*ω) + exp(-(β-τ)*ω))/expm1(-β*ω)
 
 
 @doc raw"""
