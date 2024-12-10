@@ -11,9 +11,13 @@ include("truncated_normal_noise.jl")
 
 # define various types of kernel functions used for analytic continuation
 include("kernel_functions.jl")
-export kernel_tau_fermi, kernel_tau_bose, kernel_tau_sym_bose
-export kernel_mat_fermi, kernel_mat_bose
-export fermi, bose
+export kernel_mat
+export kernel_tau_fermi, kernel_mat_fermi
+export kernel_tau_bose, kernel_mat_bose
+export kernel_tau_bose_alt, kernel_mat_bose_alt
+export kernel_tau_sym_bose, kernel_mat_sym_bose
+export kernel_tau_sym_bose_alt, kernel_mat_sym_bose_alt
+export bose, fermi
 
 # functions that take as inputs the spectral function and return various correlation kernel_functions
 include("spectral_to_correlation_function.jl")

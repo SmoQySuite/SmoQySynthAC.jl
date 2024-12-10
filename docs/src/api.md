@@ -22,21 +22,58 @@ add_noise!
 
 ## Kernel Functions
 
+- [`kernel_mat`](@ref)
 - [`kernel_tau_fermi`](@ref)
-- [`kernel_tau_bose`](@ref)
-- [`kernel_tau_sym_bose`](@ref)
 - [`kernel_mat_fermi`](@ref)
+- [`kernel_tau_bose`](@ref)
 - [`kernel_mat_bose`](@ref)
+- [`kernel_tau_bose_alt`](@ref)
+- [`kernel_mat_bose_alt`](@ref)
+- [`kernel_tau_sym_bose`](@ref)
+- [`kernel_mat_sym_bose`](@ref)
+- [`kernel_tau_sym_bose_alt`](@ref)
+- [`kernel_mat_sym_bose_alt`](@ref)
+
+```@docs
+kernel_mat
+```
+
+### Fermionic Kernel Functions
 
 ```@docs
 kernel_tau_fermi
-kernel_tau_bose
-kernel_tau_sym_bose
 kernel_mat_fermi
+```
+
+### Bosonic Kernel Functions
+
+```@docs
+kernel_tau_bose
 kernel_mat_bose
 ```
 
-## Utility Functions
+### Modified Bosonic Kernel Functions
+
+```@docs
+kernel_tau_bose_alt
+kernel_mat_bose_alt
+```
+
+### Symmetric Bosonic Kernel Function
+
+```@docs
+kernel_tau_sym_bose
+kernel_mat_sym_bose
+```
+
+### Modified Symmetric Bosonic Kernel Function
+
+```@docs
+kernel_tau_sym_bose_alt
+kernel_mat_sym_bose_alt
+```
+
+## Quantum Statistics Functions
 
 - [`fermi`](@ref)
 - [`bose`](@ref)

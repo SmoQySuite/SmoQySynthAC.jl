@@ -5,9 +5,6 @@
     simple_poles(z; locations, residues) = sum(simple_pole(z, location = locations[i], residue = residues[i]) for i in eachindex(locations))
     spe_spectral_function(ω; locations, residues, η=1.0e-9) = -inv(π)*imag(simple_poles(ω + η*im, locations = locations, residues = residues))
 
-    # non-interacting single-particle fermion green's function
-    noninteracting_greens(τ, β, ϵ) = inv(exp(τ*ϵ) + exp((τ-β)*ϵ))
-
     # single-particle state energy
     ϵ = 0.2
 
@@ -21,7 +18,7 @@
     τ = collect(range(start = 0.0, stop = β, step = Δτ))
 
     # exact non-interacting greens
-    G_exact = noninteracting_greens.(τ, β, ϵ)
+    G_exact = kernel_tau_fermi.(ϵ, τ, β)
 
     # numerical fudge factor for pole-represention of non-interacting greens
     η = 1.0e-12

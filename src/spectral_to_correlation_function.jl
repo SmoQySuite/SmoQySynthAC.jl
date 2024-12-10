@@ -6,6 +6,7 @@
         spectral_function::Function,
         kernel_function::Function,
         tol::T = 1e-10,
+        bounds = (-Inf, +Inf)
     ) where {T<:AbstractFloat}
 
 Calculate and return the imaginary-time correlation function
@@ -21,7 +22,8 @@ a specified tolerance `tol`.
 - `τ::AbstractVector{T}`: Vector of imaginary time such that `τ[end] = β` equal the inverse temperature.
 - `spectral_function::Function`: The spectral function ``A(\omega)`` that takes a single argument.
 - `kernel_function::Function`: The kernel function ``K_\beta(\omega,\tau)`` that takes three arguments as shown.
-- `tol::T = 1e-10`: Specified precision with which ``C(\tau)`` is evaluated.
+- `tol::T = 1e-10`: Specified precision with which ``C(\tau)`` is evaluated
+- `bounds = (-Inf, +Inf)`: Bounds on integration domain.
 """
 function spectral_to_imaginary_time_correlation_function(;
     # KEYWORD ARGUMENTS
@@ -30,11 +32,12 @@ function spectral_to_imaginary_time_correlation_function(;
     spectral_function::Function,
     kernel_function::Function,
     tol::T = 1e-10,
+    bounds = (-Inf, 0.0, +Inf)
 ) where {T<:AbstractFloat}
 
     Cτ = quadgk(
         ω -> @.(kernel_function(ω, τ, β) * spectral_function(ω)),
-        -Inf, 0.0, +Inf,
+        bounds...,
         atol = tol
     )[1]
 
@@ -50,6 +53,7 @@ end
         spectral_function::Function,
         kernel_function::Function,
         tol::T = 1e-10,
+        bounds = (-Inf, 0.0, +Inf)
     ) where {T<:AbstractFloat}
 
 Calculate and return the Matsubara correlation function
@@ -70,6 +74,7 @@ or ``\omega_n = 2n\pi/\beta`` depending on whether the kernel function is fermio
 - `spectral_function::Function`: The spectral function ``A(\omega)`` that takes a single argument.
 - `kernel_function::Function`: The kernel function ``K_\beta(\omega,\omega_n)`` that takes three arguments as shown.
 - `tol::T = 1e-10`: Specified precision with which ``C({\rm i}\omega_n)`` is evaluated.
+- `bounds = (-Inf, +Inf)`: Bounds on integration domain.
 """
 function spectral_to_matsubara_correlation_function(;
     # KEYWORD ARGUMENTS
@@ -78,11 +83,12 @@ function spectral_to_matsubara_correlation_function(;
     spectral_function::Function,
     kernel_function::Function,
     tol::T = 1e-10,
+    bounds = (-Inf, 0.0, +Inf)
 ) where {T<:AbstractFloat}
 
     Cτ = quadgk(
         ω -> @.(kernel_function(ω, n, β) * spectral_function(ω)),
-        -Inf, 0.0, +Inf,
+        bounds...,
         atol = tol
     )[1]
 
