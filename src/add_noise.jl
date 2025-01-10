@@ -52,7 +52,7 @@ given by ``|C(\tau_j)|`` and ``\sigma`` respectively.
 
 The support for the Truncated Normal and Gamma distributions is ``[0,\infty)``.
 Note that in the case that a Normal distribution is used it is possible for ``C_{\rm noisy}(\tau_i)``
-to have a different sign that ``C(\tau_i)``, where this is not possible with the other two distributions.
+to have a different sign that ``C(\tau_i)``, whereas this is not possible with the other two distributions.
 """
 function add_noise(;
     # KEYWORD ARGUMENTS
@@ -133,6 +133,7 @@ end
     ) where {T<:AbstractFloat}
 
 Add noise to an imaginary time correlation function ``C(\tau)`` that is exponentially correlated in imaginary time.
+See [`add_noise`](@ref) for more information.
 
 ## Arguments
 
@@ -228,13 +229,32 @@ function _add_noise!(
     τ′ = @view τ[1:Lτ]
     R′ = @view R[1:Lτ]
 
-    # calculate exponential smoothing function
-    f  = @. exp(-min(τ′, β-τ′)/ξ)
-    V  = sqrt(sum(fi^2 for fi in f))
-    f /= V
-
-    # convolve iid noise with exponential to generate correlated noise
-    Cτ_noisy[1:Lτ] .= real.(ifft( fft(R′) .* fft(f) ))
+    # iterate over imaginary time
+    @inbounds for i in eachindex(R′)
+        # initialize noise to zero
+        Cτ_noisy[i] = 0.0
+        # initialize normalization factor
+        V = 0.0
+        # iterate over imaginary time
+        for j in eachindex(R′)
+            # calculate weight
+            Δτ = abs(τ′[j] - τ′[i])
+            Wij = exp(-min(Δτ, β-Δτ)/ξ)
+            # update noise
+            Cτ_noisy[i] += R′[j] * Wij
+            # update normalization
+            V += Wij^2
+        end
+        # normalize noise
+        Cτ_noisy[i] /= sqrt(V)
+    end
+    
+    # # calculate exponential smoothing function
+    # f  = @. exp(-min(τ′, β-τ′)/ξ)
+    # V  = sqrt(sum(fi^2 for fi in f))
+    # f /= V
+    # # convolve iid noise with exponential to generate correlated noise
+    # Cτ_noisy[1:Lτ] .= real.(ifft( fft(R′) .* fft(f) ))
 
     # generate noisy correlation data by summing true correlation with the correlated noise
     @. Cτ_noisy = Cτ_exact + Cτ_noisy
