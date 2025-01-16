@@ -6,7 +6,8 @@
         spectral_function::Function,
         kernel_function::Function,
         tol::T = 1e-10,
-        bounds = (-Inf, +Inf)
+        bounds = (-Inf, +Inf),
+        normalize::Bool = false
     ) where {T<:AbstractFloat}
 
 Calculate and return the imaginary-time correlation function
@@ -24,6 +25,7 @@ a specified tolerance `tol`.
 - `kernel_function::Function`: The kernel function ``K_\beta(\omega,\tau)`` that takes three arguments as shown.
 - `tol::T = 1e-10`: Specified precision with which ``C(\tau)`` is evaluated
 - `bounds = (-Inf, +Inf)`: Bounds on integration domain.
+- `normalize::Bool = false`: Whether the spectral function needs to be normalized to unity.
 """
 function spectral_to_imaginary_time_correlation_function(;
     # KEYWORD ARGUMENTS
@@ -32,11 +34,22 @@ function spectral_to_imaginary_time_correlation_function(;
     spectral_function::Function,
     kernel_function::Function,
     tol::T = 1e-10,
-    bounds = (-Inf, 0.0, +Inf)
+    bounds = (-Inf, 0.0, +Inf),
+    normalize::Bool = false
 ) where {T<:AbstractFloat}
 
+
+    V = one(T)
+    if normalize
+        V = quadgk(
+            ω -> spectral_function(ω),
+            bounds...,
+            atol = tol
+        )[1]
+    end
+
     Cτ = quadgk(
-        ω -> @.(kernel_function(ω, τ, β) * spectral_function(ω)),
+        ω -> @.(kernel_function(ω, τ, β) * spectral_function(ω) / V),
         bounds...,
         atol = tol
     )[1]
@@ -53,7 +66,8 @@ end
         spectral_function::Function,
         kernel_function::Function,
         tol::T = 1e-10,
-        bounds = (-Inf, 0.0, +Inf)
+        bounds = (-Inf, 0.0, +Inf),
+        normalize::Bool = false
     ) where {T<:AbstractFloat}
 
 Calculate and return the Matsubara correlation function
@@ -75,6 +89,7 @@ or ``\omega_n = 2n\pi/\beta`` depending on whether the kernel function is fermio
 - `kernel_function::Function`: The kernel function ``K_\beta(\omega,\omega_n)`` that takes three arguments as shown.
 - `tol::T = 1e-10`: Specified precision with which ``C({\rm i}\omega_n)`` is evaluated.
 - `bounds = (-Inf, +Inf)`: Bounds on integration domain.
+- `normalize::Bool = false`: Whether the spectral function needs to be normalized to unity.
 """
 function spectral_to_matsubara_correlation_function(;
     # KEYWORD ARGUMENTS
@@ -83,11 +98,21 @@ function spectral_to_matsubara_correlation_function(;
     spectral_function::Function,
     kernel_function::Function,
     tol::T = 1e-10,
-    bounds = (-Inf, 0.0, +Inf)
+    bounds = (-Inf, 0.0, +Inf),
+    normalize::Bool = false
 ) where {T<:AbstractFloat}
 
+    V = one(T)
+    if normalize
+        V = quadgk(
+            ω -> spectral_function(ω),
+            bounds...,
+            atol = tol
+        )[1]
+    end
+
     Cτ = quadgk(
-        ω -> @.(kernel_function(ω, n, β) * spectral_function(ω)),
+        ω -> @.(kernel_function(ω, n, β) * spectral_function(ω) / V),
         bounds...,
         atol = tol
     )[1]
