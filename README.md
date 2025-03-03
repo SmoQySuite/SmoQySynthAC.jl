@@ -5,10 +5,10 @@
 [![Build Status](https://github.com/SmoQySuite/SmoQySynthAC.jl/actions/workflows/CI.yml/badge.svg?branch=main)](https://github.com/SmoQySuite/SmoQySynthAC.jl/actions/workflows/CI.yml?query=branch%3Amain)
 [![Coverage](https://codecov.io/gh/SmoQySuite/SmoQySynthAC.jl/branch/main/graph/badge.svg)](https://codecov.io/gh/SmoQySuite/SmoQySynthAC.jl)
 
-[SmoQySynthAC.jl](https://github.com/SmoQySuite/SmoQySynthAC.jl) is a package developed to generate synthetic imaginary time correlation
-data mean to resemble noisy quantum Monte Carlo (QMC) measurements, where the introduced noise is correlated in imaginary time.
+[SmoQySynthAC.jl](https://github.com/SmoQySuite/SmoQySynthAC.jl) is a package developed to generate synthetic imaginary-time correlation
+data meant to resemble noisy quantum Monte Carlo (QMC) measurements, where the introduced noise is correlated in imaginary-time.
 This synthetic data can then be used to benchmark analytic continuation (AC) methods, or numerical methods for transforming noisy
-imaginary time correlation data to Matsubara space. The approach used to generate the noisy synthetic data is based method introduced
+imaginary-time correlation data to Matsubara space. The approach used to generate noisy synthetic data is based on a method introduced
 in Shao et. al., the citation for which is given below.
 
 ```bibtex
